@@ -12,13 +12,13 @@ class Frontend implements SubscriberInterface
             'Enlight_Controller_Action_PostDispatchSecure_Frontend_Listing' => 'onPostDispatchListing',
             'Enlight_Controller_Action_PostDispatchSecure_Frontend_Detail' => 'onPostDispatchDetail',
             'Enlight_Controller_Action_PostDispatchSecure_Frontend_Checkout' => 'onPostDispatchCheckout',
-            'Enlight_Controller_Action_PostDispatchSecure_Frontend_Account' => 'onPostDispatchAccount',
+            'Enlight_Controller_Action_PostDispatchSecure_Frontend_Account' => 'onPostDispatchAccount'
         ];
     }
 
     public function test()
     {
-        
+
     }
      public function onPostDispatchIndex(\Enlight_Event_EventArgs $args)
     {
@@ -55,12 +55,12 @@ class Frontend implements SubscriberInterface
 
         $checkoutAction = $this->getAction($checkoutController);
 
-        switch ($action) {
+        switch ($checkoutAction) {
             case cart:
-              $fbEventCode = "fbq('track', 'AddToCart', {content_type: 'product', content_ids: ['".$this->getBasketArticles($controller)."']})";
+              $fbEventCode = "fbq('track', 'AddToCart', {content_type: 'product', content_ids: ['".$this->getBasketArticles($checkoutController)."']})";
               break;
             case finish:
-               $fbEventCode = "fbq('track', 'Purchase', {value: ".$controller->View()->sBasket['sAmount'].", currency: 'EUR'})";
+               $fbEventCode = "fbq('track', 'Purchase', {value: ".$checkoutController->View()->sBasket['sAmount'].", currency: 'EUR'})";
                 break;
             default:
                 echo "something other";
