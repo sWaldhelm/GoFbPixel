@@ -15,7 +15,11 @@ class Frontend implements SubscriberInterface
             'Enlight_Controller_Action_PostDispatchSecure_Frontend_Account' => 'onPostDispatchAccount',
         ];
     }
-    
+
+    public function test()
+    {
+        
+    }
      public function onPostDispatchIndex(\Enlight_Event_EventArgs $args)
     {
          /** @var \Shopware_Controllers_Frontend_Detail $detailController */
