@@ -19,7 +19,6 @@ class GoFbPixel extends \Shopware\Components\Plugin
         $this->container->get('Template')->addTemplateDir(
             $this->getPath() . '/Resources/views/'
         );
-        echo "Test";
     }
 
 }

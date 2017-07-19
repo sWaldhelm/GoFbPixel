@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<plugin xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/shopware/5.2/engine/Shopware/Components/Plugin/schema/plugin.xsd">
+    <label lang="de">Geschenke-online Facebook Pixel</label>
+    <label lang="en">Geschenke-online Facebook Pixel</label>
+
+    <version>1.0.0</version>
+    <license>proprietary</license>
+    <link>https://www.geschenke-online.de/</link>
+    <author>Sebastian Waldhelm</author>
+    <copyright>geschenke-online 4you GmbH</copyright>
+    <description lang="de">Enbinden des Facebook Pixel in SW</description>
+    <description lang="en">Integrate the Facebook Pixel in SW</description>
+    
+    <compatibility minVersion="5.2.0" />
+
+    <changelog version="1.0.0">
+        <changes lang="de">Vröffentlichung</changes>
+        <changes lang="en">Releasez</changes>
+    </changelog>
+</plugin>
