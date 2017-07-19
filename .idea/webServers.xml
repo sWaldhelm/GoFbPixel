@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="1a635c40-0b31-427d-bee8-4a8ebf6edca6" name="GO_Testshop" url="http://localhost">
+        <fileTransfer host="localhost" port="3111" rootFolder="/var/www/www.geschenke-online.de/web/testshop" accessType="SFTP" authAgent="true">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="3111" />
+        </fileTransfer>
+      </webServer>
+      <webServer id="45fd466b-4fc3-43e9-a301-e58b6be5721e" name="Go_Liveshop" url="http://localhost">
+        <fileTransfer host="localhost" port="3111" rootFolder="/var/www/www.geschenke-online.de/web" accessType="SFTP" authAgent="true">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="3111" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

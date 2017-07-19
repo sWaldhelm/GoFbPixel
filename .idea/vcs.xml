@@ -2,6 +2,5 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
-    <mapping directory="C:\xampp\htdocs\shopware\custom\plugins\GoFbPixel\GoFbPixel" vcs="Git" />
   </component>
 </project>
