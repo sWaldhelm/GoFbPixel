@@ -51,12 +51,12 @@ class Frontend implements SubscriberInterface
 
         $checkoutAction = $this->getAction($checkoutController);
 
-        switch ($checkoutAction) {
+        switch ($action) {
             case cart:
-              $fbEventCode = "fbq('track', 'AddToCart', {content_type: 'product', content_ids: ['".$this->getBasketArticles($checkoutController)."']})";
+              $fbEventCode = "fbq('track', 'AddToCart', {content_type: 'product', content_ids: ['".$this->getBasketArticles($controller)."']})";
               break;
             case finish:
-               $fbEventCode = "fbq('track', 'Purchase', {value: ".$checkoutController->View()->sBasket['sAmount'].", currency: 'EUR'})";
+               $fbEventCode = "fbq('track', 'Purchase', {value: ".$controller->View()->sBasket['sAmount'].", currency: 'EUR'})";
                 break;
             default:
                 echo "something other";
