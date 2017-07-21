@@ -16,92 +16,80 @@ class Frontend implements SubscriberInterface
         ];
     }
 
-    public function test()
+    public function onPostDispatchIndex(\Enlight_Event_EventArgs $args)
     {
-
-    }
-     public function onPostDispatchIndex(\Enlight_Event_EventArgs $args)
-    {
-         /** @var \Shopware_Controllers_Frontend_Detail $detailController */
         $indexController = $args->getSubject();
         $view = $indexController->View();
-
         $view->assign('fbBaseCode' , $this->getPageViewTrack());
     }
-    
+
     public function onPostDispatchListing(\Enlight_Event_EventArgs $args)
     {
         $listingController = $args->getSubject();
         $view = $listingController->View();
-
         $view->assign('fbBaseCode' , $this->getPageViewTrack());
     }
-    
+
     public function onPostDispatchDetail(\Enlight_Event_EventArgs $args)
     {
-       $detailController = $args->getSubject();
-       $sArticle = $detailController->View()->getAssign('sArticle');
-       
-       $view = $detailController->View();
+        $detailController = $args->getSubject();
+        $sArticle = $detailController->View()->getAssign('sArticle');
 
-       $view->assign('fbBaseCode' , $this->getPageViewTrack());
-       $view->assign('fbEventCode', "fbq('track', 'ViewContent', { content_type: 'product', content_ids: ['".$sArticle['ordernumber']."']});");
+        $view = $detailController->View();
+        $view->assign('fbBaseCode' , $this->getPageViewTrack());
+        $view->assign('fbEventCode', "fbq('track', 'ViewContent', { content_type: 'product', content_ids: ['".$sArticle['ordernumber']."']});");
     }
-    
-     public function onPostDispatchCheckout(\Enlight_Event_EventArgs $args)
+
+    public function onPostDispatchCheckout(\Enlight_Event_EventArgs $args)
     {
         $checkoutController = $args->getSubject();
         $view = $checkoutController->View();
-
         $checkoutAction = $this->getAction($checkoutController);
-
-        switch ($checkoutAction) {
+      /* switch ($checkoutAction) {
             case cart:
-              $fbEventCode = "fbq('track', 'AddToCart', {content_type: 'product', content_ids: ['".$this->getBasketArticles($checkoutController)."']})";
-              break;
+                $fbEventCode = "fbq('track', 'AddToCart', {content_type: 'product', content_ids: ['".$this->getBasketArticles($checkoutController)."']})";
+                break;
             case finish:
-               $fbEventCode = "fbq('track', 'Purchase', {value: ".$checkoutController->View()->sBasket['sAmount'].", currency: 'EUR'})";
+                $fbEventCode = "fbq('track', 'Purchase', {value: ".$checkoutController->View()->sBasket['sAmount'].", currency: 'EUR'})";
                 break;
             default:
                 echo "something other";
                 echo "<br /><br /><br />";
-        }
-
-        $view->assign('fbEventCode' , $fbEventCode);
+        }*/
+        $view->assign('fbBaseCode' , $this->getPageViewTrack());
     }
-    
-    
+
+
     public function onPostDispatchAccount(\Enlight_Event_EventArgs $args)
     {
-       // $this->admin = Shopware()->Modules()->Admin();
-               
+        // $this->admin = Shopware()->Modules()->Admin();
+
         $accountController = $args->getSubject();
         $view = $accountController->View();
-        
+
         $accountAction = $this->getAction($accountController);
-        
-        switch ($accountAction) {
+
+       /* switch ($accountAction) {
             case payment:
                 $fbEventCode = "fbq('track', 'AddPaymentInfo')";
-        }
-        
-        $view->assign('fbEventCode' , $fbEventCode);
+        }*/
+
+        $view->assign('fbBaseCode' , $this->getPageViewTrack());
     }
-    
+
     private function getPageViewTrack()
     {
         return "fbq('track', 'PageView');";
     }
-    
+
     private function getAction($controller)
     {
         return $controller->Request()->getActionName();
     }
-    
-        private function getBasketArticles($controller)
-    {
-         $basket = $controller->View()->sBasket;
 
+    private function getBasketArticles($controller)
+    {
+        $basket = $controller->View()->sBasket;
         $ordernumbers = '';
         foreach ($basket['content'] as $basketItem)
         {
@@ -111,5 +99,5 @@ class Frontend implements SubscriberInterface
         }
         return $ordernumbers;
     }
-    
+
 }

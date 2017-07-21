@@ -10,11 +10,11 @@
     <copyright>geschenke-online 4you GmbH</copyright>
     <description lang="de">Enbinden des Facebook Pixel in SW</description>
     <description lang="en">Integrate the Facebook Pixel in SW</description>
-    
+
     <compatibility minVersion="5.2.0" />
 
     <changelog version="1.0.0">
         <changes lang="de">Vröffentlichung</changes>
-        <changes lang="en">Releasez</changes>
+        <changes lang="en">Release</changes>
     </changelog>
 </plugin>

@@ -1,9 +1,9 @@
 <?xml version="1.0" ?>
-<container xmlns="http://symfony.com/schema/dic/services">  
+<container xmlns="http://symfony.com/schema/dic/services">
     <services>
         <service id="go_fb_pixel.frontend" class="GoFbPixel\Subscriber\Frontend">
             <argument type="service" id="service_container" />
-            <tag name="shopware.event_subscriber" />    
+            <tag name="shopware.event_subscriber" />
         </service>
     </services>
 </container>
