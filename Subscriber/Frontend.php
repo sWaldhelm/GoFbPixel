@@ -1,8 +1,6 @@
 <?php
 namespace GoFbPixel\Subscriber;
-
 use Enlight\Event\SubscriberInterface;
-
 class Frontend implements SubscriberInterface
 {
     public static function getSubscribedEvents()
@@ -15,78 +13,65 @@ class Frontend implements SubscriberInterface
             'Enlight_Controller_Action_PostDispatchSecure_Frontend_Account' => 'onPostDispatchAccount'
         ];
     }
-
     public function onPostDispatchIndex(\Enlight_Event_EventArgs $args)
     {
         $indexController = $args->getSubject();
         $view = $indexController->View();
         $view->assign('fbBaseCode' , $this->getPageViewTrack());
     }
-
     public function onPostDispatchListing(\Enlight_Event_EventArgs $args)
     {
         $listingController = $args->getSubject();
         $view = $listingController->View();
         $view->assign('fbBaseCode' , $this->getPageViewTrack());
     }
-
     public function onPostDispatchDetail(\Enlight_Event_EventArgs $args)
     {
         $detailController = $args->getSubject();
         $sArticle = $detailController->View()->getAssign('sArticle');
-
         $view = $detailController->View();
         $view->assign('fbBaseCode' , $this->getPageViewTrack());
         $view->assign('fbEventCode', "fbq('track', 'ViewContent', { content_type: 'product', content_ids: ['".$sArticle['ordernumber']."']});");
     }
-
     public function onPostDispatchCheckout(\Enlight_Event_EventArgs $args)
     {
         $checkoutController = $args->getSubject();
         $view = $checkoutController->View();
         $checkoutAction = $this->getAction($checkoutController);
-      /* switch ($checkoutAction) {
+        switch ($checkoutAction) {
             case cart:
                 $fbEventCode = "fbq('track', 'AddToCart', {content_type: 'product', content_ids: ['".$this->getBasketArticles($checkoutController)."']})";
                 break;
-            case finish:
-                $fbEventCode = "fbq('track', 'Purchase', {value: ".$checkoutController->View()->sBasket['sAmount'].", currency: 'EUR'})";
-                break;
-            default:
-                echo "something other";
-                echo "<br /><br /><br />";
-        }*/
+            /*  case finish:
+            $fbEventCode = "fbq('track', 'Purchase', {value: ".$checkoutController->View()->sBasket['sAmount'].", currency: 'EUR'})";
+            break;
+        default:
+            echo "something other";
+            echo "<br /><br /><br />";*/
+        }
         $view->assign('fbBaseCode' , $this->getPageViewTrack());
+        $view->assign('fbEventCode' , $fbEventCode);
     }
-
-
     public function onPostDispatchAccount(\Enlight_Event_EventArgs $args)
     {
         // $this->admin = Shopware()->Modules()->Admin();
-
         $accountController = $args->getSubject();
         $view = $accountController->View();
-
         $accountAction = $this->getAction($accountController);
-
-       /* switch ($accountAction) {
-            case payment:
-                $fbEventCode = "fbq('track', 'AddPaymentInfo')";
-        }*/
-
+        /* switch ($accountAction) {
+             case payment:
+                 $fbEventCode = "fbq('track', 'AddPaymentInfo')";
+         }*/
         $view->assign('fbBaseCode' , $this->getPageViewTrack());
     }
-
     private function getPageViewTrack()
     {
         return "fbq('track', 'PageView');";
     }
-
     private function getAction($controller)
     {
         return $controller->Request()->getActionName();
     }
-
     private function getBasketArticles($controller)
     {
         $basket = $controller->View()->sBasket;
@@ -99,5 +84,4 @@ class Frontend implements SubscriberInterface
         }
         return $ordernumbers;
     }
-
 }

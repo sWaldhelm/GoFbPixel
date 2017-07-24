@@ -11,7 +11,6 @@ class GoFbPixel extends \Shopware\Components\Plugin
             'Enlight_Controller_Action_PreDispatch_Frontend' => 'preparePlugin',
         ];
     }
-
     public function preparePlugin()
     {
         $this->container->get('Template')->addTemplateDir(
