@@ -45,6 +45,9 @@ class Frontend implements SubscriberInterface
             case finish:
                 $fbEventCode = "fbq('track', 'Purchase', {value: ".$checkoutController->View()->sBasket['sAmount'].", currency: 'EUR'})";
                 break;
+            case confirm:
+                $fbEventCode = "fbq('track', 'InitiateCheckout')";
+                break;
             /* default:
                  echo "something other";
                  echo "<br /><br /><br />";*/
